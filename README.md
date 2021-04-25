@@ -5,6 +5,21 @@ based on Intel x86 syntax
 - [x] Wet exercises on aseembly languege including some small funtions.
 - [x] Dry excrcise in order to get you to know the assembly syntax and operations.
 
+## Folder structure
+You must have the following folder structure to be able to run the tests
+
+project:
+  * tests:
+    * test_1_1
+    * test_2_1
+    * test_3_1
+    * test_4_1
+    * test_5_1
+  * ex1.asm
+  * ex2.asm
+  * ex3.asm
+  * ex4.asm
+  * ex5.asm
 ## How to run
 On your linux you will likely be able to run it with
 ```
