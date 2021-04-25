@@ -20,12 +20,13 @@ project:
   * ex3.asm
   * ex4.asm
   * ex5.asm
-## How to run
-On your linux you will likely be able to run it with
+## How to run tests
+On your linux you will likely be able to run it with <br />
+for example test1 on ex1:
 ```
-./run_test ex1.asm tests/test_N1_n1
+./run_test ex1.asm tests/test_1_1
 ```
 if the command will return an error you probably should run this command first:
-'''
+```
 chmod +x <your .sh file>
-  '''
+```
