@@ -10,11 +10,11 @@ You must have the following folder structure to be able to run the tests
 
 project:
   * tests:
-    * test_1_1
-    * test_2_1
-    * test_3_1
-    * test_4_1
-    * test_5_1
+    * test_1_1.sh
+    * test_2_1.sh
+    * test_3_1.sh
+    * test_4_1.sh
+    * test_5_1.sh
   * ex1.asm
   * ex2.asm
   * ex3.asm
