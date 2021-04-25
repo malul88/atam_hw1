@@ -7,6 +7,10 @@ based on Intel x86 syntax
 
 ## How to run
 On your linux you will likely be able to run it with
-```./run_test ex1.asm tests/test_N1_n1
-python3 ex2_tester.py
 ```
+./run_test ex1.asm tests/test_N1_n1
+```
+if the command will return an error you probably should run this command first:
+'''
+chmod +x <your .sh file>
+  '''
