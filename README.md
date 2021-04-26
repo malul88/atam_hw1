@@ -1,4 +1,4 @@
-# atam_hw1
+# atam HomeWork 1
 Getting started to know the assembly language <br />
 based on Intel x86 syntax
 ## what you will see here
@@ -20,11 +20,12 @@ project:
   * ex3.asm
   * ex4.asm
   * ex5.asm
+  * run_test.sh
 ## How to run tests
 On your linux you will likely be able to run it with <br />
 for example test1 on ex1:
 ```
-./run_test ex1.asm tests/test_1_1
+./run_test.sh ex1.asm tests/test_1_1
 ```
 if the command will return an error you probably should run this command first:
 ```
