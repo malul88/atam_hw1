@@ -60,6 +60,6 @@ _start:
         movq %r10, 8(%rbx) # src_next<- dst-next
         
     end:
-        ret
+        # ret
     
     
