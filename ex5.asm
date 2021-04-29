@@ -1,22 +1,9 @@
 .global _start
 
-#.section .data
-#head: .quad ANode
-#src: .quad 5
-#dst: .quad 4
-#BNode:  .quad 4
-#    .quad NULL
-#ANode:  .quad 5
-#    .quad BNode
-#.set NULL, 0
-
 .section .text
 _start:
 #your code here
-    # movq $5, src
-    # movq $4, dst
-    
-    # movq head, %rax # address of current node
+  
     movq head, %rbx
     movq head, %rax
 
@@ -60,6 +47,6 @@ _start:
         movq %r10, 8(%rbx) # src_next<- dst-next
         
     end:
-        ret
+        
     
     
