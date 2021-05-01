@@ -52,7 +52,7 @@ _start:
         movl $0, begin
     
     end:
-        movl len, %eax
-        movl begin, %ebx
-        ret
+        # movl len, %eax
+        # movl begin, %ebx
+        # ret
         
