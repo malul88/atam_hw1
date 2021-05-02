@@ -1,5 +1,7 @@
 .global _start
 
+
+
 .section .text
 _start:
 #your code here
@@ -38,8 +40,21 @@ _start:
         jmp loop_2
     
     swap:
-        movq %rdx, (%rax) # put add of dst to before of src
-        movq %rbx, (%rcx) # put add of src to before of dst
+        cmp %rax , %rbx    # check if head points to src (private case)
+        je head_p
+        movq %rdx,8(%rax)  # address of dst to pointer of src
+        movq %rbx, 8(%rcx) # address of src to pinter of dst
+        
+        movq 8(%rdx), %r10 # r10 = dst_next
+        movq 8(%rbx), %r11 # r11 = src_next
+        movq %r11, 8(%rdx) # dst_next <- src_next
+        movq %r10, 8(%rbx) # src_next<- dst-next
+        jmp end
+        
+        
+    head_p:    
+        movq %rdx, head    # address of dst to head
+        movq %rbx, 8(%rcx) # address of src to dst
         
         movq 8(%rdx), %r10 # r10 = dst_next
         movq 8(%rbx), %r11 # r11 = src_next
@@ -47,10 +62,6 @@ _start:
         movq %r10, 8(%rbx) # src_next<- dst-next
         
     end:
-<<<<<<< HEAD
-        
-=======
-        # ret
->>>>>>> b82b3b6a60b71d6e07068473a3cc81ed7335858b
-    
+      
+
     
