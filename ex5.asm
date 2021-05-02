@@ -47,6 +47,10 @@ _start:
         movq %r10, 8(%rbx) # src_next<- dst-next
         
     end:
+<<<<<<< HEAD
         
+=======
+        # ret
+>>>>>>> b82b3b6a60b71d6e07068473a3cc81ed7335858b
     
     
