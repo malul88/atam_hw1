@@ -1,0 +1,6 @@
+Test Results:
+ex1.asm tested with test_1_1: PASS
+ex2.asm tested with test_2_1: PASS
+ex3.asm tested with test_3_1: PASS
+ex4.asm tested with test_4_1: PASS
+ex5.asm tested with test_5_1: PASS
