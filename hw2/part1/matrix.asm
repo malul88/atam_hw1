@@ -46,6 +46,7 @@ multiplyMatrices:
 		movl -28(%rbp), %edx # m
 		cmp -40(%rbp), %edx # i
 		je end_loop_i
+		movl $0, -44(%rbp) # j
 
 		loop_j:
 			# check j == r
