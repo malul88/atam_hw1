@@ -20,7 +20,9 @@ my_ili_handler: # i don't think prologue and epilogue are needed here because th
   movb %dl, %dil # rdi lower byte now holds first byte of opcode
   cmpb $0x0f, %dl # check lower byte of opcode is 0x0f
   jne call_what # can move to calling func
-  movb %dh, %dil # put second byte of opcode into rdi
+  movw %dx, %di
+  shr $8, %di
+  # movb %dh, %dil # put second byte of opcode into rdi
   movq $2, %rsi
 
   # call what_to_do with the last byte of opcode
@@ -41,7 +43,7 @@ my_ili_handler: # i don't think prologue and epilogue are needed here because th
 
   # in case returned == 0, original handler needs to sort it
   what_ret_zero:
-  # ?????????
+  jmp old_ili_handler
   
   end: 
   # restore changed registers (other than rdi) and return
