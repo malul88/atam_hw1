@@ -1,77 +1,36 @@
 #include <asm/desc.h>
 #include <linux/mm.h>
 
-// Do we need this? RB
-struct idt_t {
-    void *base;
-    unsigned short length;
-};
 
-// void my_store_idt(struct desc_ptr *idtr) {
-//     // read idtr into memory
-//     struct idt_t idt;
-//     asm volatile ("sidt %0" : "=m"(idt));
-
-//     // copy idtr
-//     idtr->address = __get_free_page(GFP_KERNEL);
-//     idtr->size = idt.length;
-//     memcpy((void *)idtr->address, idt.base, idt.length);
-// }
-
-void my_store_idt(struct desc_ptr *idtr) {
-    // read idtr into memory
-    struct desc_ptr idt;
-    asm volatile ("sidt %0" : "=m"(idt));
-
-    // copy idtr
-    idtr->address = __get_free_page(GFP_KERNEL);
-    idtr->size = idt.size;
-    memcpy((void *)idtr->address, (void *)idt.address, idt.size);
+void my_store_idt(struct desc_ptr *idtr) { 
+    asm volatile ("sidt %0" : "=m"(*idtr));
 }
 
-// void my_load_idt(struct desc_ptr *idtr) { // might need to use desc_ptr struct instead of idt_t 
-//     struct idt_t idt;
-//     idt.base = (void *)idtr->address;
-//     idt.length = idtr->size;
-//     asm volatile ("lidt %0" :: "m"(idt));
-// }
-
-void my_load_idt(struct desc_ptr *idtr) { // might need to use desc_ptr struct instead of idt_t 
-    struct desc_ptr idt;
-    idt.address = idtr->address;
-    idt.size = idtr->size;
-    asm volatile ("lidt %0" :: "m"(idt));
+void my_load_idt(struct desc_ptr *idtr) { 
+    asm ("lidt %0" :: "m"(*idtr));
 }
 
 void my_set_gate_offset(gate_desc *gate, unsigned long addr) {
-    int i = 0, j = 0, bit;
-    gate->offset_low = 0;
-    for(; i<16; i++){
-        bit = addr%2;
-        bit = bit << i;
-        gate->offset_low += bit;
-        addr >>= 1;
-    }
+    unsigned short max_short = 65535;
+    unsigned int max_int = 4294967295;
 
-    gate->offset_middle = 0;
-    for(; j<16; j++){
-        bit = addr%2;
-        bit = bit << j;
-        gate->offset_middle += bit;
-        addr >>= 1;
-    }
+    unsigned long needed_bits = addr;
+	gate->offset_low = (unsigned short) (needed_bits & max_short);
 
-    gate->offset_high = addr;
+    needed_bits = needed_bits >> 16;
+	gate->offset_middle = (unsigned short) (needed_bits & max_short);
+
+    needed_bits = needed_bits >> 16;
+	gate->offset_high = (unsigned int) (needed_bits & max_int);
 }
 
 unsigned long my_get_gate_offset(gate_desc *gate) {
-    //gate = &idt_entry for invalid opcode
-    unsigned long offset = 0;
-    offset += gate->offset_high;
-    offset = offset << 16;
-    offset += gate->offset_middle;
-    offset = offset << 16;
-    offset += gate->offset_low;
+	unsigned long to_ret = 0;
+    unsigned long to_ret_low = (unsigned long) gate->offset_low;
+    unsigned long to_ret_mid = (unsigned long) gate->offset_middle;
+    unsigned long to_ret_high = (unsigned long) gate->offset_high;
 
-    return offset;
+    to_ret = to_ret_low | (to_ret_mid << 16) | (to_ret_high << 32);
+	
+    return to_ret;
 }
