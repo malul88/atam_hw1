@@ -11,9 +11,6 @@ msg2_end: .quad msg2_end-msg2
 
 .section .text
     _start:
-        # mov $1, %rdi
-        # mov $msg, %rsi
-        # mov msg_end, %rdx
         mov $1, %rax
         mov $1, %rdi
         mov $msg1, %rsi
@@ -33,24 +30,6 @@ msg2_end: .quad msg2_end-msg2
     shit:
         pushq %rbp
         movq %rsp, %rbp
-
-        mov $1, %rax
-        mov $1, %rdi
-        mov $msg2, %rsi
-        mov (msg2_end), %rdx
-        syscall
-
-        mov $1, %rax
-        mov $1, %rdi
-        mov $msg2, %rsi
-        mov (msg2_end), %rdx
-        syscall
-
-        mov $1, %rax
-        mov $1, %rdi
-        mov $msg2, %rsi
-        mov (msg2_end), %rdx
-        syscall
 
         leave
         ret
